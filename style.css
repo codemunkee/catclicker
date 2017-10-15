@@ -17,6 +17,10 @@
 
 .cat-title h1 {
   margin-bottom: 0px;
+  background: linear-gradient(330deg, #f05252 0%, #a9e052 25%, #00e0e0 50%, #9952e0 75%, #f09952 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 .click-count {
@@ -34,7 +38,8 @@
   margin-bottom: 40px;
   width: 270px;
   font-family: "Fjalla One", sans-serif;
-  border: solid 2px black;
+  border: solid 2px magenta;
+  border-radius: 10px;
 }
 
 .cat-image-box h2 {
@@ -43,4 +48,5 @@
 
 .cat-image {
   margin: 10px;
+  cursor: pointer;
 }
