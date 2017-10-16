@@ -9,9 +9,19 @@
     catImage.addEventListener('click', handleCatClick);
   }
 
+  function incrementClick(elCatImage) {
+    // go through nodes in cat image's parent element
+    for (let node of elCatImage.parentNode.children) {
+      // find the click-count element and increment it
+      if (node.className === 'click-count') {
+        node.textContent = parseInt(node.textContent) + 1;
+      }
+    }
+  }
+
   function handleCatClick() {
       updateCatPicture(this);
-      clickCount.textContent = parseInt(clickCount.textContent) + 1;
+      incrementClick(this);
   }
 
   function parseCatURL(rawXML) {
