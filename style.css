@@ -1,3 +1,7 @@
+body {
+  background: #ffffff url('./geometry2.png'); /* Background pattern from Subtle Patterns */
+}
+
 .cat-container {
   display: flex;
   flex-wrap: wrap;
@@ -60,6 +64,7 @@
 
 .cat-image-box {
   display: none;
+  background-color: white;
   text-align: center;
   margin-left: 10px;
   margin-right: 10px;
@@ -67,7 +72,6 @@
   width: 370px;
   font-family: "Fjalla One", sans-serif;
   border: solid 2px magenta;
-  background-color: lightpurple;
   border-radius: 10px;
 }
 
