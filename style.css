@@ -17,7 +17,37 @@
   background: linear-gradient(330deg, #f05252 0%, #a9e052 25%, #00e0e0 50%, #9952e0 75%, #f09952 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
 
+.cat-list {
+  display: flex;
+  justify-content: center;
+  font-family: "Fjalla One", sans-serif;
+  width: 100%;
+  margin: 0;
+}
+
+.cat-list ol {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.cat-list li {
+  float: left;
+}
+
+.cat-list a {
+   display: block;
+   color: magenta;
+   text-transform: uppercase;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+}
+
+.cat-list li a:hover {
+  border-radius: 10px;
+  background-color: lightblue;
 }
 
 .click-count {
@@ -29,13 +59,15 @@
 }
 
 .cat-image-box {
+  display: none;
   text-align: center;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 40px;
-  width: 270px;
+  width: 370px;
   font-family: "Fjalla One", sans-serif;
   border: solid 2px magenta;
+  background-color: lightpurple;
   border-radius: 10px;
 }
 
@@ -44,6 +76,14 @@
 }
 
 .cat-image {
+  border-color: #0087F3;
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 5px;
   margin: 10px;
   cursor: pointer;
+}
+
+#cat1 {
+  display: block;
 }
