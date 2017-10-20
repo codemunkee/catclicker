@@ -9,12 +9,20 @@
   <div class="main">
     <div class="sidenav">
       <a href="#" class="closebtn">&times;</a>
-      <form>
-        <select name="cats">
-          <option value="1">Cat 1</option>
-        </select>
-        <span>Name: </span><input>Cat Name</input>
-        <span>Clicks: </span><input>Clicks</input>
+      <form class="admin">
+        <label>
+          Cat Name
+          <select class="admin-cat-select"></select>
+        </label>
+        <label>
+          Update Cat Name
+          <input class="admin-cat-name"></input>
+        </label>
+        <label>
+          Update Click Count
+          <input class="admin-click-count"></input>
+        </label>
+        <button>Update</button>
       </form>
     </div>
 

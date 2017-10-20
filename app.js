@@ -44,6 +44,9 @@
   };
 
   let octopus = {
+
+    adminOpen: false,
+
     init: function() {
       model.init();
       model.addCatData({id: 1, name: "Cat 1", clicks: 0});
@@ -114,7 +117,7 @@
       catImage = $('.cat-image');
 
       function parseCatURL(rawXML) {
-        // create an object model from the XML returned,
+
         // and retreive the URL for the cat picture
         const parser = new DOMParser();
         const xDOM = parser.parseFromString(rawXML, 'text/xml');
@@ -133,16 +136,42 @@
       /* Set the width of the side navigation to 250px */
       function openNav() {
         $('.sidenav').css('width', '250px');
+        octopus.adminOpen = true;
+        const cats = octopus.getCats();
+        const activeCat = octopus.getCat(octopus.getActiveCatId());
+        const adminCatSelect = $('.admin-cat-select');
+        const adminCatName = $('.admin-cat-name');
+        const adminCatClicks = $('.admin-click-count');
+
+        adminCatSelect.empty();
+        for (const cat of cats) {
+          if (cat.id === activeCat.id) {
+            adminCatSelect.append(`<option selected>${cat.name}</option>`);
+          } else {
+            adminCatSelect.append(`<option>${cat.name}</option>`);
+          }
+        }
+
+        console.log(activeCat);
+
+        adminCatName.val(activeCat.name);
+        adminCatClicks.val(activeCat.clicks);
+
       }
 
       /* Set the width of the side navigation to 0 */
       function closeNav() {
         $('.sidenav').css('width', '0');
+        octopus.adminOpen = false;
+      }
+
+      if (octopus.adminOpen) {
+        openNav();
       }
 
       $('.closebtn').click(closeNav);
+      $('.admin-button').unbind();
       $('.admin-button').click(openNav);
-
     }
   };
 
