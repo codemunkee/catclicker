@@ -8,9 +8,27 @@
     },
 
     addCatData: function(catObject) {
-       let catData = JSON.parse(localStorage.cats);
-       catData.push(catObject);
-       localStorage.cats = JSON.stringify(catData);
+      let catData = JSON.parse(localStorage.cats);
+      catData.push(catObject);
+      localStorage.cats = JSON.stringify(catData);
+    },
+
+    updateCatData: function(catObject) {
+      const id = parseInt(catObject.id);
+      const name = catObject.name;
+      const clicks = parseInt(catObject.clicks);
+      let catData = JSON.parse(localStorage.cats);
+
+      // find the index in the array of the particular cat object
+      // and write the updated values
+      for (let i = 0; i < catData.length; i++) {
+        if (catData[i].id === id) {
+          catData[i].name = name;
+          catData[i].clicks = clicks;
+        }
+      }
+
+      localStorage.cats = JSON.stringify(catData);
     },
 
     getCatsData: function() {
@@ -18,6 +36,7 @@
     },
 
     getCatData: function(id) {
+      id = parseInt(id);
       const cat = model.getCatsData().filter(cat => {
         return cat.id === id;
       });
@@ -29,10 +48,12 @@
     },
 
     setActiveCatId: function(id) {
+      id = parseInt(id);
       model.activeCat = id;
     },
 
     incrementClicks: function(id) {
+      id = parseInt(id);
       let catData = model.getCatsData();
       for (let i = 0; i < catData.length; i++) {
         if (catData[i].id === id) {
@@ -54,7 +75,11 @@
       model.addCatData({id: 3, name: "Cat 3", clicks: 0});
       model.addCatData({id: 4, name: "Cat 4", clicks: 0});
       model.addCatData({id: 5, name: "Cat 5", clicks: 0});
-      view.init();
+      view.render();
+    },
+
+    updateCat: function (catObj) {
+      model.updateCatData(catObj);
       view.render();
     },
 
@@ -63,6 +88,7 @@
     },
 
     getCat: function(id) {
+      id = parseInt(id);
       // we put the index 0 at the end of the return so as
       // not to return the object's index in localStorage
       return model.getCatData(id)[0];
@@ -84,7 +110,8 @@
   };
 
   let  view = {
-    init: function() {
+    render: function() {
+
       const cats = octopus.getCats();
 
       this.catLinkContainer = $('.cat-list ol');
@@ -102,9 +129,7 @@
           </li>`);
           $('#' + cat.id + '-cat-link').click(setActiveCat(cat.id));
       }
-    },
 
-    render: function() {
       const cat = octopus.getCat(octopus.getActiveCatId());
       let catImageHTML = `<figure id="${cat.id}-cat-box" class="cat-image-box">
               <h2>${cat.name}</h2>
@@ -130,10 +155,9 @@
         })
         .then(xml => {
           catImage.attr('src', parseCatURL(xml));
-          $('.cat-image').click(() => { octopus.incrementClicks(); });
+          $('.cat-image').unbind().click(() => { octopus.incrementClicks(); });
       });
 
-      /* Set the width of the side navigation to 250px */
       function openNav() {
         $('.sidenav').css('width', '250px');
         octopus.adminOpen = true;
@@ -146,20 +170,28 @@
         adminCatSelect.empty();
         for (const cat of cats) {
           if (cat.id === activeCat.id) {
-            adminCatSelect.append(`<option selected>${cat.name}</option>`);
+            adminCatSelect.append(`<option value="${cat.id}" selected>${cat.name}</option>`);
           } else {
-            adminCatSelect.append(`<option>${cat.name}</option>`);
+            adminCatSelect.append(`<option value="${cat.id}">${cat.name}</option>`);
           }
         }
-
-        console.log(activeCat);
 
         adminCatName.val(activeCat.name);
         adminCatClicks.val(activeCat.clicks);
 
+        // if the admin user selects a new cat, update DOM to show active cat
+        adminCatSelect.change(function(item) {
+          octopus.setActiveCatId(parseInt(item.target.value));
+        });
+
+        $('.adminUpdateBtn').unbind();
+        $('.adminUpdateBtn').click(() => {
+          octopus.updateCat({id: activeCat.id,
+                          name: adminCatName.val(),
+                          clicks: adminCatClicks.val() });
+        });
       }
 
-      /* Set the width of the side navigation to 0 */
       function closeNav() {
         $('.sidenav').css('width', '0');
         octopus.adminOpen = false;
