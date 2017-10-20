@@ -6,23 +6,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="cat-container">
-
-    <div class="cat-title">
-      <h1>Cat Clicker</h1>
+  <div class="main">
+    <div class="sidenav">
+      <a href="#" class="closebtn">&times;</a>
+      <form>
+        <select name="cats">
+          <option value="1">Cat 1</option>
+        </select>
+        <span>Name: </span><input>Cat Name</input>
+        <span>Clicks: </span><input>Clicks</input>
+      </form>
     </div>
 
-    <section class="cat-list">
-      <ol>
-        <li><a class="cat-link" href="#" data-cat="cat1">Cat 1</a></li>
-        <li><a class="cat-link" href="#" data-cat="cat2">Cat 2</a></li>
-        <li><a class="cat-link" href="#" data-cat="cat3">Cat 3</a></li>
-        <li><a class="cat-link" href="#" data-cat="cat4">Cat 4</a></li>
-        <li><a class="cat-link" href="#" data-cat="cat5">Cat 5</a></li>
-      </ol>
-    </section>
+    <div class="cat-container">
 
-    <section class="cat-box"></section>
+      <div class="cat-title">
+        <h1>Cat Clicker</h1>
+      </div>
+
+      <section class="cat-list">
+        <ol>
+          <li><a class="cat-link" href="#" data-cat="cat1">Cat 1</a></li>
+          <li><a class="cat-link" href="#" data-cat="cat2">Cat 2</a></li>
+          <li><a class="cat-link" href="#" data-cat="cat3">Cat 3</a></li>
+          <li><a class="cat-link" href="#" data-cat="cat4">Cat 4</a></li>
+          <li><a class="cat-link" href="#" data-cat="cat5">Cat 5</a></li>
+        </ol>
+      </section>
+
+      <section class="cat-box"></section>
+    </div>
+    <div class="admin-button">Admin</div>
   </div>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"

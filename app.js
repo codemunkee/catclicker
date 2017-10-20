@@ -87,13 +87,17 @@
       this.catLinkContainer = $('.cat-list ol');
       this.catLinkContainer.empty();
 
+      function setActiveCat(id) {
+        return () => {
+          octopus.setActiveCatId(id);
+        };
+      }
+
       for (const cat of cats) {
         this.catLinkContainer.append(`<li>
           <a id="${cat.id}-cat-link" class="cat-link" href="#">${cat.name}</a>
           </li>`);
-          $('#' + cat.id + '-cat-link').click(_ => {
-            octopus.setActiveCatId(cat.id);
-          });
+          $('#' + cat.id + '-cat-link').click(setActiveCat(cat.id));
       }
     },
 
@@ -125,6 +129,19 @@
           catImage.attr('src', parseCatURL(xml));
           $('.cat-image').click(() => { octopus.incrementClicks(); });
       });
+
+      /* Set the width of the side navigation to 250px */
+      function openNav() {
+        $('.sidenav').css('width', '250px');
+      }
+
+      /* Set the width of the side navigation to 0 */
+      function closeNav() {
+        $('.sidenav').css('width', '0');
+      }
+
+      $('.closebtn').click(closeNav);
+      $('.admin-button').click(openNav);
 
     }
   };
